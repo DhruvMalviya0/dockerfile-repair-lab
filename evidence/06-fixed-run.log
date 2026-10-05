@@ -1,0 +1,37 @@
+$ docker run -d --name lab -p 8080:8080 app:fixed
+4ab76a579ac42644d537130855eb9892953439201283088ad25c095275227a2e
+
+$ docker ps --filter name=lab
+IMAGE       STATUS         PORTS
+app:fixed   Up 2 seconds   0.0.0.0:8080->8080/tcp
+
+$ docker logs lab
+Server is running on port 8080
+
+$ curl -s http://localhost:8080/api/status
+{"status":"ok","timestamp":"2026-10-05T03:55:58.688Z","environment":"production"}
+
+$ curl -s http://localhost:8080/ | grep -o "Docker Repair Lab Running Successfully"
+Docker Repair Lab Running Successfully
+
+$ curl -s -o /dev/null -w "%{http_code}\n" http://localhost:8080/
+200
+
+$ docker exec lab whoami
+node
+
+$ docker exec lab ls /app
+app.js
+node_modules
+package-lock.json
+package.json
+public
+src
+
+$ docker exec lab grep -c package-lock.json /app/package.json   # no stray dependency any more
+0
+
+$ docker image ls app
+REPOSITORY:TAG   SIZE
+app:fixed        199MB
+app:broken       203MB

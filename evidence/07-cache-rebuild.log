@@ -1,0 +1,23 @@
+# Rebuild after a source-only change (comment appended to src/utils.js).
+# Expected: steps up to npm ci are CACHED; only the source COPY layers rebuild.
+
+$ docker build --progress=plain -t app:fixed .
+#1 DONE 0.0s
+#2 DONE 0.0s
+#3 DONE 0.0s
+#4 DONE 0.0s
+#5 [1/7] FROM docker.io/library/node:20-alpine@sha256:57af77ccbfd0aa339eae72a256752147a19f7bc604b459513a2ebccfdf4c4fa4
+#5 DONE 0.0s
+#6 [3/7] COPY package.json package-lock.json ./
+#6 CACHED
+#7 [4/7] RUN npm ci --omit=dev && npm cache clean --force
+#7 CACHED
+#8 [2/7] WORKDIR /app
+#8 CACHED
+#9 [5/7] COPY --chown=node:node app.js ./
+#9 CACHED
+#10 [6/7] COPY --chown=node:node src ./src
+#10 DONE 0.0s
+#11 [7/7] COPY --chown=node:node public ./public
+#11 DONE 0.0s
+#12 DONE 0.1s
