@@ -1,2 +1,16 @@
+# Dependencies are installed inside the image with npm ci
 node_modules
+npm-debug.log
+
+# Secrets
 .env
+
+# VCS, docs and lab evidence are not needed at runtime
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+DEBUGGING-NOTES.md
+evidence
+.DS_Store
