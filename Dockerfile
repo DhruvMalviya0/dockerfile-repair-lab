@@ -7,9 +7,6 @@ COPY . .
 # Install exactly what package-lock.json pins (production deps only)
 RUN npm ci --omit=dev
 
-# Copying a folder that doesn't exist in the project
-COPY missing-folder ./missing-folder
-
 EXPOSE 8080
 
 # Incorrect startup command
