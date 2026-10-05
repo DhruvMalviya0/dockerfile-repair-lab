@@ -1,0 +1,44 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 360B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:20-alpine
+#2 DONE 0.7s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 62B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 81.13kB done
+#4 DONE 0.0s
+
+#5 [2/5] COPY . .
+#5 CACHED
+
+#6 [3/5] WORKDIR /wrong
+#6 CACHED
+
+#7 [4/5] RUN npm install package-lock.json
+#7 CACHED
+
+#8 [5/5] COPY missing-folder ./missing-folder
+#8 ERROR: failed to calculate checksum of ref l2z8pgw6j3rfckvmwib0tu9lx::52wx8a8vyvyfm161vp71hjigh: "/missing-folder": not found
+
+#9 [1/5] FROM docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+#9 resolve docker.io/library/node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 0.0s done
+#9 CANCELED
+------
+ > [5/5] COPY missing-folder ./missing-folder:
+------
+Dockerfile:11
+--------------------
+   9 |     
+  10 |     # Copying a folder that doesn't exist in the project
+  11 | >>> COPY missing-folder ./missing-folder
+  12 |     
+  13 |     EXPOSE 8080
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref l2z8pgw6j3rfckvmwib0tu9lx::52wx8a8vyvyfm161vp71hjigh: "/missing-folder": not found

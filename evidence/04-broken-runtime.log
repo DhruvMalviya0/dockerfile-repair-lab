@@ -1,0 +1,28 @@
+$ docker run --rm app:broken
+npm error Missing script: "production"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-10-05T03_55_01_158Z-debug-0.log
+[container exit code: 1]
+
+$ docker run --rm app:broken node /app.js   # bypass CMD to expose the .dockerignore problem
+node:internal/modules/cjs/loader:1210
+  throw err;
+  ^
+
+Error: Cannot find module './src/routes'
+Require stack:
+- /app.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Module.require (node:internal/modules/cjs/loader:1289:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/app.js:3:16)
+[container exit code: 1]
+
+$ docker run --rm app:broken ls /src
+ls: /src: No such file or directory
+
+$ docker run --rm app:broken grep package-lock.json /package.json   # side effect of "npm install package-lock.json"
+    "package-lock.json": "^1.0.0"
