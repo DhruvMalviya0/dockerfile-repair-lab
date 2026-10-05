@@ -9,5 +9,5 @@ RUN npm ci --omit=dev
 
 EXPOSE 8080
 
-# Incorrect startup command
-CMD ["npm", "run", "production"]
+# Start the server directly (same as the "start" script in package.json)
+CMD ["node", "app.js"]
