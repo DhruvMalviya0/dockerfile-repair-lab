@@ -4,8 +4,8 @@ FROM node:20-alpine
 WORKDIR /app
 COPY . .
 
-# Broken dependency installation
-RUN npm install package-lock.json
+# Install exactly what package-lock.json pins (production deps only)
+RUN npm ci --omit=dev
 
 # Copying a folder that doesn't exist in the project
 COPY missing-folder ./missing-folder
