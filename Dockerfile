@@ -1,8 +1,8 @@
 FROM node:20-alpine
 
-# Copy files first, then change directory
+# Set the working directory before copying so files land in /app
+WORKDIR /app
 COPY . .
-WORKDIR /wrong
 
 # Broken dependency installation
 RUN npm install package-lock.json
