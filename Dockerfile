@@ -1,4 +1,4 @@
-FROM node:notfound
+FROM node:20-alpine
 
 # Copy files first, then change directory
 COPY . .
